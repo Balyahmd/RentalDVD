@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\dvd;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 
 class DvdController extends Controller
 {
@@ -66,8 +68,8 @@ class DvdController extends Controller
     public function update(Request $request, string $id)
     {
         $dvd = dvd::findOrFail($id);
-
         if ($request->file('img_url')) {
+            Storage::disk('public')->delete('{{ $dvd->img_url }}');
             $file = $request->file('img_url');
             $filename = $file->store('public/path');
             $dvd->update(['title' => $request->title, 'harga' => $request->harga, 'deskripsi' => $request->deskripsi, 'dvd_code' => $request->dvd_code, 'img_url' => $filename, 'rilis' => $request->rilis, 'durasi' => $request->durasi, 'produser' => $request->produser]);

@@ -8,6 +8,7 @@
     <div class="row">
         <div class="col mb-3">
             <img class="image" src="{{Storage::url($dvd->img_url)}}" alt="">
+            <img class="image" src="{{ $dvd->img_url }}" alt="">
         </div>
     </div>
     <div class="row">
