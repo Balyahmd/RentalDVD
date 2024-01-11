@@ -5,7 +5,7 @@
 @section('contents')
     <h3 class="mb-0">Edit Product</h3>
     <hr />
-    <form action="{{ route('dvd.update', $dvd->id) }}" method="POST">
+    <form action="{{ route('dvd.update', $dvd->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="row">
@@ -21,7 +21,7 @@
             </div>
             <div class="col mb-3">
                 <label class="form-label">Harga</label>
-                <input type="text" name="price" class="form-control" placeholder="harga" value="{{ $dvd->harga }}" >
+                <input type="text" name="harga" class="form-control" placeholder="harga" value="{{ $dvd->harga }}" >
             </div>
         </div>
         <div class="row">
