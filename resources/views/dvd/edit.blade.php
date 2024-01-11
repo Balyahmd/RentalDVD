@@ -1,32 +1,50 @@
 @extends('templete')
   
-@section('title', 'Edit Product')
+@section('title')
   
 @section('contents')
-    <h1 class="mb-0">Edit Product</h1>
+    <h3 class="mb-0">Edit Product</h3>
     <hr />
     <form action="{{ route('dvd.update', $dvd->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row">
             <div class="col mb-3">
-                <label class="form-label">Harga</label>
+                <label class="form-label">Judul</label>
                 <input type="text" name="title" class="form-control" placeholder="Title" value="{{ $dvd->title }}" >
-            </div>
-            <div class="col mb-3">
-                <label class="form-label">Price</label>
-                <input type="text" name="price" class="form-control" placeholder="Price" value="{{ $product->price }}" >
             </div>
         </div>
         <div class="row">
             <div class="col mb-3">
-                <label class="form-label">Product Code</label>
-                <input type="text" name="product_code" class="form-control" placeholder="Product Code" value="{{ $product->product_code }}" >
+                <label class="form-label">DVD Code</label>
+                <input type="text" name="dvd_code" class="form-control" placeholder="DVD code" value="{{ $dvd->dvd_code }}" >
             </div>
             <div class="col mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" name="description" placeholder="Descriptoin" >{{ $product->description }}</textarea>
+                <label class="form-label">Harga</label>
+                <input type="text" name="price" class="form-control" placeholder="harga" value="{{ $dvd->harga }}" >
             </div>
+        </div>
+        <div class="row">
+            <div class="col mb-3">
+                <label class="form-label">Produser</label>
+                <input type="text" name="produser" class="form-control" placeholder="Produser" value="{{ $dvd->produser }}" >
+            </div>
+            <div class="col mb-3">
+                <label class="form-label">Tanggal/Tahun Rilis</label>
+                <input type="text" name="rilis" class="form-control" placeholder="Tanggal/Tahun Rilis" value="{{ $dvd->rilis }}" >
+            </div>
+            <div class="col mb-3">
+                <label class="form-label">Durasi DVD</label>
+                <input type="text" name="durasi" class="form-control" placeholder="harga" value="{{ $dvd->durasi }}" >
+            </div>
+        </div>
+        <div class="col mb-3">
+            <img class="image-url mb-3" src="{{Storage::url($dvd->img_url)}}" alt="">
+            <input type="file" class="form-control" required name="img_url">
+        </div>
+        <div class="col mb-3">
+            <label class="form-label">Deskripsi</label>
+            <textarea class="form-control" name="deskripsi" placeholder="Deskripsi">{{$dvd->deskripsi}}</textarea>
         </div>
         <div class="row">
             <div class="d-grid">

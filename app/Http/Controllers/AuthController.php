@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     public function register()
     {
-        return view('auth/register');
+        return view('Auth/register');
     }
 
     public function registerSave(Request $request)
@@ -35,7 +35,7 @@ class AuthController extends Controller
     }
     public function login()
     {
-        return view('auth/login');
+        return view('Auth/login');
     }
 
     public function loginAction(Request $request)
@@ -47,7 +47,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed')
+                'email' => trans('Auth.failed')
             ]);
         }
 

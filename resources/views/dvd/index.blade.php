@@ -1,11 +1,11 @@
 @extends('templete')
   
-@section('title', 'Home Product')
+@section('title')
   
 @section('contents')
     <div class="d-flex align-items-center justify-content-between">
-        <h1 class="mb-0">List Product</h1>
-        <a href="{{ route('dvd.create') }}" class="btn btn-primary">Add Product</a>
+        <h3 class="mb-0">List Product</h3>
+        <a href="{{ route('dvd.create') }}" class="btn btn-primary">Tambah DVD +</a>
     </div>
     <hr />
     @if(Session::has('success'))
@@ -33,7 +33,7 @@
                     <tr>
                         <td class="align-middle">{{$dvd->dvd_code}}</td>
                         <td class="align-middle">
-                            <img src={{ $dvd->img_url }} alt="">
+                            <img class="image-url" src="{{Storage::url($dvd->img_url)}}" alt="">
                         </td>
                         <td class="align-middle">{{$dvd->title}}</td>
                         <td class="align-middle">{{$dvd->harga}}</td>

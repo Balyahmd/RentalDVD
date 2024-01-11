@@ -32,9 +32,12 @@ class DvdController extends Controller
      */
     public function store(Request $request)
     {
-        dvd::create($request->all());
-
-        return redirect()->route('dvd')->with('success', 'DVD added successfully');
+        if ($request->file('img_url')) {
+            $file = $request->file('img_url');
+            $filename = $file->store('public/path');
+            dvd::create(['title' => $request->title, 'harga' => $request->harga, 'deskripsi' => $request->deskripsi, 'dvd_code' => $request->dvd_code, 'img_url' => $filename, 'rilis' => $request->rilis, 'durasi' => $request->durasi, 'produser' => $request->produser]);
+        }
+        return redirect('dvd')->with('success', 'DVD added successfully');
     }
 
     /**
@@ -64,9 +67,12 @@ class DvdController extends Controller
     {
         $dvd = dvd::findOrFail($id);
 
-        $dvd->update($request->all());
-
-        return redirect()->route('dvd')->with('success', 'DVD updated successfully');
+        if ($request->file('img_url')) {
+            $file = $request->file('img_url');
+            $filename = $file->store('public/path');
+            $dvd->update(['title' => $request->title, 'harga' => $request->harga, 'deskripsi' => $request->deskripsi, 'dvd_code' => $request->dvd_code, 'img_url' => $filename, 'rilis' => $request->rilis, 'durasi' => $request->durasi, 'produser' => $request->produser]);
+        }
+        return redirect('dvd')->with('success', 'DVD updated successfully');
     }
 
     /**
@@ -78,6 +84,6 @@ class DvdController extends Controller
 
         $product->delete();
 
-        return redirect()->route('dvd')->with('success', 'DVD deleted successfully');
+        return redirect('dvd')->with('success', 'DVD deleted successfully');
     }
 }

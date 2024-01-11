@@ -1,6 +1,6 @@
 @extends('templete')
   
-@section('title', 'Profile')
+@section('title')
   
 @section('contents')
     <h1 class="mb-0">Profile</h1>

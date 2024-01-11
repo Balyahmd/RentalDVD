@@ -33,12 +33,12 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(DvdController::class)->prefix('dvd')->group(function () {
         Route::get('', 'index')->name('dvd');
-        Route::get('create', 'create')->name('dvd.create');
-        Route::post('store', 'store')->name('dvd.store');
-        Route::get('show/{id}', 'show')->name('dvd.show');
-        Route::get('edit/{id}', 'edit')->name('dvd.edit');
-        Route::put('edit/{id}', 'update')->name('dvd.update');
-        Route::delete('destroy/{id}', 'destroy')->name('dvd.destroy');
+        Route::get('create', 'create')->name('create');
+        Route::post('store', 'store')->name('store');
+        Route::get('show/{id}', 'show')->name('show');
+        Route::get('edit/{id}', 'edit')->name('edit');
+        Route::put('edit/{id}', 'update')->name('update');
+        Route::delete('destroy/{id}', 'destroy')->name('destroy');
     });
 
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
