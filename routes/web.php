@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     })->name('dashboard');
 
     Route::controller(DvdController::class)->prefix('dvd')->group(function () {
-        Route::get('', 'index')->name('dvd');
+        Route::get('', 'index')->name('dvd.index');
         Route::get('create', 'create')->name('create');
         Route::post('store', 'store')->name('store');
         Route::get('show/{id}', 'show')->name('show');

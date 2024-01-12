@@ -11,11 +11,26 @@ class DvdController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
         // $dvd = dvd::all();
         // return view('Dashbord.index', compact('dvd'));
         $dvd = dvd::orderBy('created_at', 'DESC')->get();
+
+        $search = $request->input('search');
+
+        if($search){
+            $dvd = dvd::query()
+            ->when($search, function ($query) use ($search) {
+                $query->where('title', 'like', '%' . $search . '%');
+            })
+            ->get();
+            return view('dvd.index', compact('dvd'));
+        }
+
+        // Use Eloquent to retrieve posts based on the search criteria
+
 
         return view('dvd.index', compact('dvd'));
     }
@@ -33,12 +48,21 @@ class DvdController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->file('img_url')) {
-            $file = $request->file('img_url');
-            $filename = $file->store('public/path');
-            dvd::create(['title' => $request->title, 'harga' => $request->harga, 'deskripsi' => $request->deskripsi, 'dvd_code' => $request->dvd_code, 'img_url' => $filename, 'rilis' => $request->rilis, 'durasi' => $request->durasi, 'produser' => $request->produser]);
+
+
+        try {
+            
+            if ($request->file('img_url')) {
+                $file = $request->file('img_url');
+                $filename = $file->store('public/path');
+                dvd::create(['title' => $request->title, 'harga' => $request->harga, 'deskripsi' => $request->deskripsi, 'dvd_code' => $request->dvd_code, 'img_url' => $filename, 'rilis' => $request->rilis, 'durasi' => $request->durasi, 'produser' => $request->produser]);
+            }
+            return redirect('dvd')->with('success', 'DVD added successfully');
+        } catch (\Exception $e) {
+            $errorMessage = $e->errorInfo[2] ?? 'Unknown error';
+            return response()->view('dvd.create', ['exception' => $errorMessage]);
         }
-        return redirect('dvd')->with('success', 'DVD added successfully');
+        
     }
 
     /**

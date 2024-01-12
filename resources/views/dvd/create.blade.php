@@ -5,6 +5,8 @@
 @section('contents')
     <h1 class="mb-0">Add Product</h1>
     <hr />
+    <p>An unexpected error occurred:</p>
+    <pre>{{ $exception }}</pre>
     <form action="{{ route('dvd.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">

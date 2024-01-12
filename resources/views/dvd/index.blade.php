@@ -13,6 +13,10 @@
             {{ Session::get('success') }}
         </div>
     @endif
+    <form action="{{ route('dvd.index') }}" method="GET">
+        <input type="text" name="search" placeholder="Search posts">
+        <button type="submit">Search</button>
+    </form>
     <table class="table table-hover">
         <thead class="table-primary">
             <tr>
@@ -27,7 +31,7 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>+
+        <tbody>
             @if($dvd->count() > 0)
                 @foreach($dvd as $dvd)
                     <tr>
